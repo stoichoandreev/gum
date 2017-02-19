@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.getkeepsafe.dexcount'//we can skip this plugin in Android Studio 2.2+ because of APK Analyzer, but it give us great ./gradlew scripts
 apply plugin: 'me.tatarka.retrolambda'//we can remove this plugin but Jack and Jill is not stable yet
 
-
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
@@ -36,10 +35,14 @@ android {
                 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             }
         }
+        dexOptions {
+            incremental true
+        }
     } else {
         throw new GradleException("Could not read version.properties!")
     }
     compileOptions {
+        //We need to use JavaVersion.VERSION_1_7 because JavaVersion.VERSION_1_8 has an issue with Dagger 2 for Android Tests
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -88,16 +91,22 @@ ext {
         compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:$rxBinding"
         compile "com.squareup.picasso:picasso:$picasso"
 
-        //TODO Dagger 2 and Android Data binding have issue between them. That is way Dagger to is gonna be out of this project for while
         //Dagger 2
-        compile "com.google.dagger:dagger:$dagger"
-        annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
-        provided 'javax.annotation:jsr250-api:1.0'
+//        compile "com.google.dagger:dagger:$dagger"
+//        annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+//        provided 'javax.annotation:jsr250-api:1.0'
 ////        compile 'javax.annotation:javax.annotation-api:1.2'
+        compile "com.google.dagger:dagger:$dagger"
+        compile 'javax.annotation:jsr250-api:1.0'
+        annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+        //For Dagger DI in our tests
+        androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+        testCompile "com.google.dagger:dagger-compiler:$dagger"
 
         /*
         * Unit test tools (could need Robolectric as well)
          */
+        testCompile "junit:junit:$jUnit"
         testCompile "org.mockito:mockito-core:$mockito"
         testCompile "org.easymock:easymock:$easymock"
         testCompile "org.powermock:powermock-core:$powermock"
@@ -136,9 +145,5 @@ ext {
         androidTestCompile("com.squareup.okhttp3:mockwebserver:$mockServer") {
             exclude group: 'com.squareup.okhttp3', module: 'okhttp'
         }
-
-        //For Dagger DI in Unit tests and Instrumentation tests
-//        androidTestApt "com.google.dagger:dagger-compiler:$dagger"
-//        testApt "com.google.dagger:dagger-compiler:$dagger"
     }
 }

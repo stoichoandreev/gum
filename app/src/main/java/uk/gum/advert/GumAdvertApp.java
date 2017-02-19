@@ -54,6 +54,7 @@ public class GumAdvertApp extends Application {
      * Visible only for testing purposes.
      * This method will be used only for testing purposes to provide a mock implementation
      * of the AppComponent class to test the app flow.
+     * @param testingComponent - the test component which have test implementation of our ApplicationComponent
      */
     @VisibleForTesting
     public void setTestComponent(ApplicationComponent testingComponent) {

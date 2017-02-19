@@ -1,5 +1,7 @@
 package uk.gum.advert.ui.activities;
 
+import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -9,6 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import uk.gum.advert.R;
+import uk.gum.advert.ui.test_utils.MyTestUtils;
+import uk.gum.advert.ui.views.AdvertDetailsView;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -28,15 +32,19 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void testToolbarInitialState(){
-        //test toolbar default title
-        onView(withId(R.id.toolbar_title)).check(matches(withText("")));
-        //at the beginning toolbar back arrow should be visible
-        onView(withId(R.id.toolbar_back)).check(matches(isDisplayed()));
+    public void testDoesMainActivityImplementTheRightInterface() throws Exception {
+        MyTestUtils.implementsInterface(mActivityRule.getActivity(), AdvertDetailsView.class);
     }
 
     @Test
     public void testBaseViewsInitialState() throws Exception {
-        //TODO Need to write more instrumentation tests about MainActivity
+        //test toolbar default title
+        onView(withId(R.id.toolbar_title)).check(matches(withText("")));
+        //at the beginning toolbar back arrow should be visible
+        onView(withId(R.id.toolbar_back)).check(matches(isDisplayed()));
+        //test all action buttons
+        onView(withId(R.id.call_btn)).check(matches(withText(R.string.call))).check(matches(isDisplayed()));
+        onView(withId(R.id.sms_btn)).check(matches(withText(R.string.sms))).check(matches(isDisplayed()));
+        onView(withId(R.id.message_btn)).check(matches(withText(R.string.message))).check(matches(isDisplayed()));
     }
 }
