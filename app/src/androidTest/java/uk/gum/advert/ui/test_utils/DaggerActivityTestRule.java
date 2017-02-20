@@ -15,6 +15,10 @@ public class DaggerActivityTestRule<T extends Activity> extends ActivityTestRule
 
     private final OnBeforeActivityLaunchedListener<T> mListener;
 
+    public interface OnBeforeActivityLaunchedListener<T> {
+        void beforeActivityLaunched(@NonNull Application application, @NonNull T activity);
+    }
+
     public DaggerActivityTestRule(Class<T> activityClass,
                                   @NonNull OnBeforeActivityLaunchedListener<T> listener) {
         this(activityClass, false, listener);
@@ -35,12 +39,8 @@ public class DaggerActivityTestRule<T extends Activity> extends ActivityTestRule
     @Override
     protected void beforeActivityLaunched() {
         super.beforeActivityLaunched();
-        mListener.beforeActivityLaunched((Application) InstrumentationRegistry.getInstrumentation()
-                .getTargetContext().getApplicationContext(), getActivity());
-    }
-
-    public interface OnBeforeActivityLaunchedListener<T> {
-
-        void beforeActivityLaunched(@NonNull Application application, @NonNull T activity);
+        mListener.beforeActivityLaunched(
+                (Application) InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext(),
+                getActivity());
     }
 }

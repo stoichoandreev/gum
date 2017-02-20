@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -31,10 +32,12 @@ public class AdvertDetailsPresenterTest {
     @Mock
     private AdvertDetailsView advertDetailsView;
 
+//    @InjectMocks - NOTE we can't use InjectMocks because we are using IAdvertDetailsPresenter(interface) not AdvertDetailsPresenter
     private IAdvertDetailsPresenter presenter;
 
     @Before
     public void setUp() throws Exception {
+        //This init line can be skipped if we are using @InjectMocks but not in this case
         presenter = new AdvertDetailsPresenter(advertDetailsView, advertDetailsRepository);
     }
 

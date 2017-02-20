@@ -29,6 +29,7 @@ import uk.gum.advert.ui.test_utils.DaggerActivityTestRule;
 @LargeTest
 public class MainActivityTestWithCustomDaggerComponent {
 
+    //Before we test MainActivity let's override our Application Module with a Test implementation of the same module (TestApplicationComponent)
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule =
             new DaggerActivityTestRule<>(MainActivity.class, (application, activity) -> {
@@ -45,6 +46,7 @@ public class MainActivityTestWithCustomDaggerComponent {
     @Component(modules = {TestNetworkModel.class, ApplicationModule.class})
     interface TestApplicationComponent extends ApplicationComponent {}
 
+    //If we have more sub Modules inside our application module we can override them with test values
     @Module
     static class TestNetworkModel {
 

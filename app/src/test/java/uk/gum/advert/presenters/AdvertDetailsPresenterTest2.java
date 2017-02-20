@@ -32,11 +32,12 @@ public class AdvertDetailsPresenterTest2 {
     private IAdvertDetailsRepository advertDetailsRepository;
     @Mock
     private AdvertDetailsView advertDetailsView;
-
+//    @InjectMocks - NOTE we can't use InjectMocks because we are using IAdvertDetailsPresenter(interface) not AdvertDetailsPresenter
     private IAdvertDetailsPresenter presenter;
 
     @Before
     public void setUp() throws Exception {
+        //This init line can be skipped if we are using @InjectMocks but not in this case
         presenter = new AdvertDetailsPresenter(advertDetailsView, advertDetailsRepository);
     }
 
