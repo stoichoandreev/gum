@@ -5,7 +5,7 @@ import dagger.Provides;
 import uk.gum.advert.dagger.scopes.ActivityScope;
 import uk.gum.advert.presenters.AdvertDetailsPresenter;
 import uk.gum.advert.presenters.interfaces.IAdvertDetailsPresenter;
-import uk.gum.advert.repos.interfaces.AdvertDetailsRepository;
+import uk.gum.advert.repos.AdvertDetailsRepository;
 import uk.gum.advert.repos.interfaces.IAdvertDetailsRepository;
 import uk.gum.advert.ui.views.AdvertDetailsView;
 

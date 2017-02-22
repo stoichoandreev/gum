@@ -21,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!--Just for the tests-->
+        <activity
+            android:name=".ui.activities.testers.MainActivityT"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleInstance">
+        </activity>
     </application>
 
 </manifest>

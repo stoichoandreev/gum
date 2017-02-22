@@ -49,7 +49,7 @@ public class AdvertDetailsViewData extends BaseObservable {
         contactName = builder.contactName != null ? builder.contactName : DEFAULT_VALUE;
         description = builder.description != null ? builder.description : DEFAULT_VALUE;
         images = builder.images;
-        image = images != null && images.size() > 0 ? images.get(0) : "";
+        image = images != null && images.size() > 0 ? images.get(0) : DEFAULT_VALUE;
     }
 
     /**
@@ -235,9 +235,13 @@ public class AdvertDetailsViewData extends BaseObservable {
     //Annotated Binding adapter method must be static
     @BindingAdapter({"bind:image"})
     public static void setImage(ImageView view, String imageUrl) {
-        Picasso.with(view.getContext())
-                .load(imageUrl)
-                .placeholder(R.drawable.placeholder)
-                .into(view);
+        if(imageUrl != null) {
+            Picasso.with(view.getContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.placeholder)
+                    .into(view);
+        } else {
+            view.setBackgroundResource(R.drawable.placeholder);
+        }
     }
 }

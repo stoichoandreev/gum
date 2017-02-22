@@ -128,6 +128,13 @@ ext {
             exclude group: 'com.android.support', module: 'design'
             exclude module: 'recyclerview-v7'
         }
+
+        //For testing Intents with Espresso
+        androidTestCompile("com.android.support.test.espresso:espresso-intents:$espresso") {
+            exclude module: 'support-annotations'
+            exclude group: 'com.android.support', module: 'appcompat'
+            exclude group: 'com.android.support', module: 'support-v4'
+        }
         //Android Instrumented test tools
         androidTestCompile "junit:junit:$jUnit"
         androidTestCompile("com.android.support.test:runner:$junitRunner") {

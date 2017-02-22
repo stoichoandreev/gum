@@ -1,13 +1,14 @@
-package uk.gum.advert.ui.activities;
+package uk.gum.advert.ui.activities.main_activity;
 
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import javax.inject.Singleton;
 
@@ -16,14 +17,23 @@ import dagger.Module;
 import dagger.Provides;
 import io.reactivex.Observable;
 import uk.gum.advert.GumAdvertApp;
+import uk.gum.advert.R;
 import uk.gum.advert.api.ApiService;
 import uk.gum.advert.api.pojos.producer_details.AdvertDetailsResponseParseData;
 import uk.gum.advert.dagger.components.ApplicationComponent;
 import uk.gum.advert.dagger.modules.ApplicationModule;
+import uk.gum.advert.ui.activities.MainActivity;
 import uk.gum.advert.ui.test_utils.DaggerActivityTestRule;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by sniper on 15-Feb-2017.
+ * This test is testing the MainActivity with some test app component (In this case some TestNetworkModel)
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -59,16 +69,38 @@ public class MainActivityTestWithCustomDaggerComponent {
                 advertTestData.id = advertId;
                 advertTestData.title = "Test title";
                 advertTestData.price = "5 000 £";
-                advertTestData.address = "Test Address";
-                advertTestData.date = "Test Date";
+                advertTestData.address = "SW11 6PZ";
+                advertTestData.date = "22-Feb-2017";
                 advertTestData.fuelType = "Test Fuel";
                 advertTestData.contactNumber = "00000000";
                 advertTestData.contactName = "Test Name";
                 advertTestData.description = "Test Description";
-                advertTestData.images = Arrays.asList("http://test_url/image.jpg");
-                //return cold observable for subscribers can receive some data
+                advertTestData.images = Collections.singletonList("http://test_url/image.jpg");
                 return Observable.just(advertTestData);
             };
         }
+    }
+    @Test
+    public void shouldDisplayAllDetailsDataFromTestNetworkModel() throws Exception {
+        //test do all details (price, address, date and so on) are presented correctly from the TestNetworkModel
+        onView(withId(R.id.price_tv))
+                .check(matches(withText("5 000 £")))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.address_tv))
+                .check(matches(withText("SW11 6PZ")))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.date_tv))
+                .check(matches(withText("22-Feb-2017")))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.fuel_type_tv))
+                .check(matches(withText("Test Fuel")))
+                .check(matches(isDisplayed()));
+
+        //Test also does data update will update the UI
+        mActivityRule.getActivity().presenter.getDetailsData().setDate("29-Feb-2017");
+        Thread.sleep(1000);
+        onView(withId(R.id.date_tv))
+                .check(matches(withText("29-Feb-2017")))
+                .check(matches(isDisplayed()));
     }
 }

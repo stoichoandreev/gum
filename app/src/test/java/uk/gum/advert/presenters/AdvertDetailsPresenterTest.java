@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -16,6 +15,8 @@ import uk.gum.advert.repos.interfaces.IAdvertDetailsRepository;
 import uk.gum.advert.ui.views.AdvertDetailsView;
 
 import static org.easymock.EasyMock.mock;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -60,13 +61,13 @@ public class AdvertDetailsPresenterTest {
     @Test
     public void testResolveMessageAction() throws Exception {
         //We don't have implementation for Message Action that's why should return null
-        Assert.assertEquals(presenter.resolveMessageAction(), null);
+        Assert.assertThat(presenter.resolveMessageAction(), is(nullValue()));
     }
 
     @Test
     public void testGetShareText() throws Exception {
         //first with without details data (Should return default text)
-        Assert.assertEquals(presenter.getShareText(), "Default share text");
+        Assert.assertThat(presenter.getShareText(), is("Default share text"));
 
         //then with available text for share (Should return the actual advert title)
         final String someTitle = "My mock title";
@@ -74,13 +75,13 @@ public class AdvertDetailsPresenterTest {
                 .title(someTitle)
                 .build();
         presenter.setDetailsData(data);
-        Assert.assertEquals(presenter.getShareText(), someTitle);
+        Assert.assertThat(presenter.getShareText(), is(someTitle));
     }
 
     @Test
     public void testGetPhoneNumber() throws Exception {
         //test if we don't have any details data stored inside the presenter (Should return null)
-        Assert.assertEquals(presenter.getPhoneNumber(), null);
+        Assert.assertThat(presenter.getPhoneNumber(), is(nullValue()));
 
         //test when we have details data and some phone number inside (should return the actual phone number)
         final String somePhoneNumber = "09899883939";
@@ -88,7 +89,7 @@ public class AdvertDetailsPresenterTest {
                 .contactNumber(somePhoneNumber)
                 .build();
         presenter.setDetailsData(data);
-        Assert.assertEquals(presenter.getPhoneNumber(), somePhoneNumber);
+        Assert.assertThat(presenter.getPhoneNumber(), is(somePhoneNumber));
     }
 
     @Test
@@ -97,6 +98,6 @@ public class AdvertDetailsPresenterTest {
         AdvertDetailsViewData data = mock(AdvertDetailsViewData.class);
         presenter.setDetailsData(data);
         //We should receive the same mock data when we try to get it back
-        Assert.assertEquals(presenter.getDetailsData(), data);
+        Assert.assertThat(presenter.getDetailsData(), is(data));
     }
 }

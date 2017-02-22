@@ -24,9 +24,9 @@ import uk.gum.advert.ui.views.AdvertDetailsView;
 public class MainActivity extends AppCompatActivity implements AdvertDetailsView {
 
     @Inject
-    IAdvertDetailsPresenter presenter;
+    public IAdvertDetailsPresenter presenter;
 
-    private ActivityMainBinding activityBinding;
+    protected ActivityMainBinding activityBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity implements AdvertDetailsView
                 .getApplicationComponent()
                 .plus(new AdvertDetailsActivityModule(this))
                 .inject(this);
-        presenter.getAdvertDetailsById(10);//we can return use some real id if we need
+
+        presenter.getAdvertDetailsById(10);//we can use some real id if we need
 
         presenter.addSubscription(RxView.clicks(activityBinding.shareBtn).subscribe( x -> onShareIntentReady(presenter.resolveShareAction(Intent.ACTION_SEND, "text/plain"))));
         presenter.addSubscription(RxView.clicks(activityBinding.callBtn).subscribe( x -> onCallIntentReady(presenter.resolvePhoneNumberAction(Intent.ACTION_CALL, AdvertDetailsPresenter.TYPE_CALL))));

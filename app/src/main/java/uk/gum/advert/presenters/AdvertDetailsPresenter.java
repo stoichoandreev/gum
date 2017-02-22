@@ -93,7 +93,7 @@ public class AdvertDetailsPresenter extends BasePresenter<AdvertDetailsView, IAd
 
     @Override
     public Intent resolveMessageAction() {
-        //TODO need some implementation here, but we don't know how this kind of messages will sent
+        //TODO need some implementation here, but we don't know how this kind of messages will be send
         return null;
     }
 

@@ -2,6 +2,8 @@ package uk.gum.advert.api;
 
 import java.util.Arrays;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import uk.gum.advert.api.pojos.producer_details.AdvertDetailsResponseParseData;
 
@@ -11,6 +13,9 @@ import uk.gum.advert.api.pojos.producer_details.AdvertDetailsResponseParseData;
  */
 
 public class MyApiService implements ApiService {
+
+    @Inject
+    public MyApiService(){}
 
     @Override
     public Observable<AdvertDetailsResponseParseData> getAdvertDetails(long advertId) {

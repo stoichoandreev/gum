@@ -1,4 +1,4 @@
-package uk.gum.advert.repos.interfaces;
+package uk.gum.advert.repos;
 
 import javax.inject.Inject;
 
@@ -8,6 +8,7 @@ import io.reactivex.schedulers.Schedulers;
 import uk.gum.advert.api.ApiService;
 import uk.gum.advert.api.pojos.producer_details.AdvertDetailsResponseParseData;
 import uk.gum.advert.repos.BaseRepository;
+import uk.gum.advert.repos.interfaces.IAdvertDetailsRepository;
 
 /**
  * Created by sniper on 14-Feb-2017.
