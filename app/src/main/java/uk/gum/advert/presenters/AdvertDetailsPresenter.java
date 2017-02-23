@@ -97,24 +97,20 @@ public class AdvertDetailsPresenter extends BasePresenter<AdvertDetailsView, IAd
         return null;
     }
 
-    @Override
-    public String getShareText() {
+    String getShareText() {
         return getDetailsData() != null ? getDetailsData().getTitle() : "Default share text";
     }
 
     @Nullable
-    @Override
-    public String getPhoneNumber() {
+    String getPhoneNumber() {
         return getDetailsData() != null ? getDetailsData().getContactNumber() : null;
     }
 
-    @Override
-    public void setDetailsData(AdvertDetailsViewData data) {
+    void setDetailsData(AdvertDetailsViewData data) {
         detailsData = data;
     }
 
-    @Override
-    public AdvertDetailsViewData getDetailsData() {
+    AdvertDetailsViewData getDetailsData() {
         return detailsData;
     }
 }

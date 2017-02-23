@@ -2,7 +2,6 @@ package uk.gum.advert.presenters.interfaces;
 
 import android.content.Intent;
 
-import uk.gum.advert.models.AdvertDetailsViewData;
 import uk.gum.advert.presenters.AdvertDetailsPresenter;
 
 /**
@@ -30,9 +29,4 @@ public interface IAdvertDetailsPresenter extends IBasePresenter {
      */
     Intent resolvePhoneNumberAction(String action, @AdvertDetailsPresenter.PhoneActionType String phoneAction);
     Intent resolveMessageAction();
-
-    void setDetailsData(AdvertDetailsViewData data);
-    AdvertDetailsViewData getDetailsData();
-    String getShareText();
-    String getPhoneNumber();
 }

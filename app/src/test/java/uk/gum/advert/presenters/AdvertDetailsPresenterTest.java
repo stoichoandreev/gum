@@ -67,37 +67,37 @@ public class AdvertDetailsPresenterTest {
     @Test
     public void testGetShareText() throws Exception {
         //first with without details data (Should return default text)
-        Assert.assertThat(presenter.getShareText(), is("Default share text"));
+        Assert.assertThat(((AdvertDetailsPresenter)presenter).getShareText(), is("Default share text"));
 
         //then with available text for share (Should return the actual advert title)
         final String someTitle = "My mock title";
         AdvertDetailsViewData data = new AdvertDetailsViewData.Builder()
                 .title(someTitle)
                 .build();
-        presenter.setDetailsData(data);
-        Assert.assertThat(presenter.getShareText(), is(someTitle));
+        ((AdvertDetailsPresenter)presenter).setDetailsData(data);
+        Assert.assertThat(((AdvertDetailsPresenter)presenter).getShareText(), is(someTitle));
     }
 
     @Test
     public void testGetPhoneNumber() throws Exception {
         //test if we don't have any details data stored inside the presenter (Should return null)
-        Assert.assertThat(presenter.getPhoneNumber(), is(nullValue()));
+        Assert.assertThat(((AdvertDetailsPresenter)presenter).getPhoneNumber(), is(nullValue()));
 
         //test when we have details data and some phone number inside (should return the actual phone number)
         final String somePhoneNumber = "09899883939";
         AdvertDetailsViewData data = new AdvertDetailsViewData.Builder()
                 .contactNumber(somePhoneNumber)
                 .build();
-        presenter.setDetailsData(data);
-        Assert.assertThat(presenter.getPhoneNumber(), is(somePhoneNumber));
+        ((AdvertDetailsPresenter)presenter).setDetailsData(data);
+        Assert.assertThat(((AdvertDetailsPresenter)presenter).getPhoneNumber(), is(somePhoneNumber));
     }
 
     @Test
     public void testGetAndSetDetailsData() throws Exception {
         //Set Details data
         AdvertDetailsViewData data = mock(AdvertDetailsViewData.class);
-        presenter.setDetailsData(data);
+        ((AdvertDetailsPresenter)presenter).setDetailsData(data);
         //We should receive the same mock data when we try to get it back
-        Assert.assertThat(presenter.getDetailsData(), is(data));
+        Assert.assertThat(((AdvertDetailsPresenter)presenter).getDetailsData(), is(data));
     }
 }

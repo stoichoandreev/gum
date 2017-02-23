@@ -20,7 +20,6 @@ import uk.gum.advert.ui.views.AdvertDetailsView;
 import static org.easymock.EasyMock.anyString;
 import static org.easymock.EasyMock.mock;
 
-
 /**
  * Created by sniper on 15-Feb-2017.
  */
@@ -58,12 +57,12 @@ public class AdvertDetailsPresenterTest2 {
         AdvertDetailsViewData data = new AdvertDetailsViewData.Builder()
                 .contactNumber(somePhoneNumber)
                 .build();
-        presenter.setDetailsData(data);
+        ((AdvertDetailsPresenter)presenter).setDetailsData(data);
         PowerMockito.mockStatic(Uri.class);
         Uri uri = mock(Uri.class);
 
         PowerMockito.when(Uri.class, "parse", anyString()).thenReturn(uri);
         final Intent callIntent = presenter.resolvePhoneNumberAction(Intent.ACTION_CALL, AdvertDetailsPresenter.TYPE_CALL);
-        Assert.assertEquals(callIntent.getData(), Uri.parse(AdvertDetailsPresenter.TYPE_CALL + presenter.getPhoneNumber()));
+        Assert.assertEquals(callIntent.getData(), Uri.parse(AdvertDetailsPresenter.TYPE_CALL + ((AdvertDetailsPresenter)presenter).getPhoneNumber()));
     }
 }
