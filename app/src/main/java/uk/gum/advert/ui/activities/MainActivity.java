@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements AdvertDetailsView
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        presenter.destroyAllDisposables();
         presenter.destroyAllSubscriptions();
     }
 

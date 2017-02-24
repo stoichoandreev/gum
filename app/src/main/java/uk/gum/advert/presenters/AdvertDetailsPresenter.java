@@ -48,30 +48,17 @@ public class AdvertDetailsPresenter extends BasePresenter<AdvertDetailsView, IAd
             return;
         }
         final Observable<AdvertDetailsResponseParseData> observable = mRepository.requestAdvertData(advertId);
-        observable.subscribe(new Observer<AdvertDetailsResponseParseData>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                mView.setProgressVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNext(AdvertDetailsResponseParseData value) {
-                mView.setProgressVisibility(View.INVISIBLE);
-                //We can do this conversion with RX flatMap for example, but doing it with AdvertDetailsViewData.fromApiResponse(value)
-                // is giving us chance to test the conversion much easier with simple Unit test
-                setDetailsData(AdvertDetailsViewData.fromApiResponse(value));
-                mView.onAdvertDetailsReady(getDetailsData());
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                mView.setProgressVisibility(View.INVISIBLE);
-                mView.onRepositoryErrorOccurred(e);
-            }
-
-            @Override
-            public void onComplete() {}
-        });
+        addDisposable(observable.doOnSubscribe( __ -> mView.setProgressVisibility(View.VISIBLE))
+                .doFinally( () -> mView.setProgressVisibility(View.INVISIBLE))
+                .subscribe( data -> {
+                    //We can do this conversion with RX flatMap for example, but doing it with AdvertDetailsViewData.fromApiResponse(value)
+                    // is giving us chance to test the conversion much easier with simple Unit test
+                    setDetailsData(AdvertDetailsViewData.fromApiResponse(data));
+                    mView.onAdvertDetailsReady(getDetailsData());
+                }, error -> {
+                    mView.onRepositoryErrorOccurred(error);
+                })
+        );
     }
 
     @Override
