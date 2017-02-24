@@ -1,42 +1,28 @@
 package uk.gum.advert.utils;
 
 
-import rx.Observable;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by sniper on 24-Feb-2017.
  */
 
 public class RxUtil {
-    /**
-     * {@link rx.Observable.Transformer} that transforms the source observable to subscribe in the
-     * io thread and observe on the Android's UI thread.
-     */
-    private static Observable.Transformer ioToMainThreadSchedulerTransformer;
 
-    static {
-        ioToMainThreadSchedulerTransformer = createIOToMainThreadScheduler();
-    }
-
-    /**
-     * Get {@link rx.Observable.Transformer} that transforms the source observable to subscribe in
-     * the io thread and observe on the Android's UI thread.
-     *
-     * Because it doesn't interact with the emitted items it's safe ignore the unchecked casts.
-     *
-     * @return {@link rx.Observable.Transformer}
-     */
-    @SuppressWarnings("unchecked")
-    private static <T> Observable.Transformer<T, T> createIOToMainThreadScheduler() {
-        return tObservable -> tObservable.subscribeOn(Schedulers.io())
+    public static <T> ObservableTransformer<T, T> applySchedulers() {
+        return upstream -> upstream.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> Observable.Transformer<T, T> applyIOToMainThreadSchedulers() {
-        return ioToMainThreadSchedulerTransformer;
-    }
+//    public static <T> SingleTransformer<T, T> applySchedulersSingle(SchedulerProvider schedulerProvider) {
+//        return upstream -> upstream.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread());
+//    }
+//
+//    public static CompletableTransformer applySchedulersCompletable(SchedulerProvider schedulerProvider) {
+//        return upstream -> upstream.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread());
+//    }
 }
