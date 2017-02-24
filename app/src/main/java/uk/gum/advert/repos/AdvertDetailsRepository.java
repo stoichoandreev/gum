@@ -7,9 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import uk.gum.advert.api.ApiService;
 import uk.gum.advert.api.pojos.producer_details.AdvertDetailsResponseParseData;
-import uk.gum.advert.repos.BaseRepository;
 import uk.gum.advert.repos.interfaces.IAdvertDetailsRepository;
-import uk.gum.advert.utils.RxUtil;
 
 /**
  * Created by sniper on 14-Feb-2017.
