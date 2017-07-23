@@ -2,21 +2,19 @@ package uk.gum.advert.api;
 
 import java.util.Arrays;
 
-import javax.inject.Inject;
-
 import io.reactivex.Single;
 import uk.gum.advert.Settings;
 import uk.gum.advert.models.AdvertDetails;
 
 /**
- * We just have here some mock response to simulate Network response
+ * We just have here some mock response to simulate Network request
+ * In the real world this could be done with Retrofit 2
  */
 
 public class DefaultApiService implements ApiService {
 
     private Settings settings; //unused
 
-    @Inject
     public DefaultApiService(Settings setting) {
         this.settings = setting;
     }
@@ -27,7 +25,7 @@ public class DefaultApiService implements ApiService {
         //mock some data
         advertRawData.setId(advertId);
         advertRawData.setTitle("BMW X5 for sale");
-        advertRawData.setPrice("20 000 £");
+        advertRawData.setPrice("25 000 £");
         advertRawData.setAddress("45 Chivalry Road, London, SW11 1HX");
         advertRawData.setDate("02-Feb-2017");
         advertRawData.setFuelType("Diesel");

@@ -14,8 +14,6 @@ checkstyle {
 tasks.withType(Checkstyle) {
     reports {
         xml.enabled true
-        // the html reports groups warnings and errors under "errors" and you cannot see what is the error that is
-        // actually causing the build to fail (even in the output in the console)
         html.enabled false
     }
 }
