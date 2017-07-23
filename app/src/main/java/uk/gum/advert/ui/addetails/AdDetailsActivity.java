@@ -1,4 +1,4 @@
-package uk.gum.advert.ui.activities;
+package uk.gum.advert.ui.addetails;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -19,11 +20,10 @@ import uk.gum.advert.dagger.components.AdvertDetailsActivityComponent;
 import uk.gum.advert.dagger.components.ApplicationComponent;
 import uk.gum.advert.dagger.components.DaggerAdvertDetailsActivityComponent;
 import uk.gum.advert.dagger.modules.AdvertDetailsActivityModule;
-import uk.gum.advert.databinding.ActivityMainBinding;
+import uk.gum.advert.databinding.ActivityAdDetailsBinding;
 import uk.gum.advert.models.AdvertDetails;
 import uk.gum.advert.presenters.AdvertDetailsPresenter;
 import uk.gum.advert.ui.BaseActivity;
-import uk.gum.advert.view_models.AdvertDetailsViewData;
 
 
 public class AdDetailsActivity extends BaseActivity<AdvertDetailsPresenter, AdvertDetailsActivityComponent> implements AdvertDetailsPresenter.View {
@@ -31,7 +31,7 @@ public class AdDetailsActivity extends BaseActivity<AdvertDetailsPresenter, Adve
     @Inject
     public AdvertDetailsPresenter presenter;
 
-    protected ActivityMainBinding activityBinding;
+    protected ActivityAdDetailsBinding activityBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class AdDetailsActivity extends BaseActivity<AdvertDetailsPresenter, Adve
         getScreenComponent().inject(this);
         setPresenter(presenter);
 
-        activityBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        activityBinding = DataBindingUtil.setContentView(this, R.layout.activity_ad_details);
 
         final int adId = 10;
         presenter.getAdvertDetails(adId);
@@ -49,12 +49,16 @@ public class AdDetailsActivity extends BaseActivity<AdvertDetailsPresenter, Adve
         presenter.subscribeCallView(RxView.clicks(activityBinding.callBtn));
         presenter.subscribeSMSView(RxView.clicks(activityBinding.smsBtn));
         presenter.subscribeMessageView(RxView.clicks(activityBinding.messageBtn));
+
+        activityBinding.toolbarInclude.toolbarBack.setOnClickListener(view -> onBackPressed());
     }
 
     @Override
     public void displayAdvertDetails(@NonNull AdvertDetails advertDetails) {
-        final AdvertDetailsViewData viewData = AdvertDetailsViewData.fromApiResponse(advertDetails);
-        activityBinding.setAdvertDetails(viewData);
+        activityBinding.setAdDetails(advertDetails);
+        Picasso.with(activityBinding.currentImage.getContext())
+                .load(advertDetails.getImages().get(0))
+                .into(activityBinding.currentImage);
     }
 
     @Override

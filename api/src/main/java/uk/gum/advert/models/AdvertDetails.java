@@ -94,4 +94,5 @@ public class AdvertDetails {
     public void setImages(List<String> images) {
         this.images = images;
     }
+
 }

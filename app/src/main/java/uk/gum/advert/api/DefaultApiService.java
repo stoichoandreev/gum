@@ -22,7 +22,7 @@ public class DefaultApiService implements ApiService {
     @Override
     public Single<AdvertDetails> getAdvertDetails(long advertId) {
         final AdvertDetails advertRawData = new AdvertDetails();
-        //mock some data
+
         advertRawData.setId(advertId);
         advertRawData.setTitle("BMW X5 for sale");
         advertRawData.setPrice("25 000 £");
@@ -30,13 +30,14 @@ public class DefaultApiService implements ApiService {
         advertRawData.setDate("02-Feb-2017");
         advertRawData.setFuelType("Diesel");
         advertRawData.setContactNumber("07894503067");
-        advertRawData.setContactName("Ishaam");
+        advertRawData.setContactName("Andrey");
         advertRawData.setDescription("BMW of Tuscaloosa presents this BMW Certified Preowned 2013 X5 xDrive35i " +
                 "Premium in Vermillion Red Metallic with Oyster Leather Interior. " +
                 "Equipped with Rear DVD,Convenience Package, Cold Weather Package, 19\" Alloy Wheels, Power Tailgate, " +
                 "Panoramic Roof, Dark Bamboo Wood, Sirius Sat Radio, Heated Front Seats, BMW Apps, iPod Adapter and much more!" +
                 "Buy with confidence knowing you'll be covered by the BMW Certified Preowned Warranty. " +
                 "Call today to schedule your VIP appointment and take advantage of great finance rates. 205-345-9811");
+
         advertRawData.setImages(Arrays.asList("http://autopazar.co.uk/media/10419/Used_Bmw_X5_2010_Grey_4x4_Diesel_Automatic_for_Sale_in_Suffolk_UK.jpg",
                 "http://autopazar.co.uk/media/10419/Used_Bmw_X5_Xdrive35d_M_Sport_5_Door_4x4_Grey_2010_Diesel_for_Sale_in_UK.jpg",
                 "http://www.carandclassic.co.uk/uploads/cars/bmw/6235481.jpg",

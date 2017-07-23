@@ -22,7 +22,7 @@ import uk.gum.advert.api.ApiService;
 import uk.gum.advert.models.AdvertDetails;
 import uk.gum.advert.dagger.components.ApplicationComponent;
 import uk.gum.advert.dagger.modules.ApplicationModule;
-import uk.gum.advert.ui.activities.AdDetailsActivity;
+import uk.gum.advert.ui.addetails.AdDetailsActivity;
 import uk.gum.advert.ui.test_utils.DaggerActivityTestRule;
 
 import static android.support.test.espresso.Espresso.onView;

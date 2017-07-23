@@ -42,12 +42,12 @@ public class DefaultAdvertDetailsPresenter extends BasePresenter<AdvertDetailsPr
 
     @Override
     public void subscribeCallView(@NonNull Observable<Object> viewObservable) {
-        viewObservable.subscribe(x -> mView.handleCallIntent(getPhoneNumber()));
+        viewObservable.subscribe(x -> mView.handleCallIntent(getDetailsData().getContactNumber()));
     }
 
     @Override
     public void subscribeSMSView(@NonNull Observable<Object> viewObservable) {
-        viewObservable.subscribe(x -> mView.handleSMSIntent(getPhoneNumber()));
+        viewObservable.subscribe(x -> mView.handleSMSIntent(getDetailsData().getContactNumber()));
     }
 
     @Override
@@ -57,12 +57,9 @@ public class DefaultAdvertDetailsPresenter extends BasePresenter<AdvertDetailsPr
 
     @NonNull
     String getShareText() {
-        return getDetailsData() != null ? getDetailsData().getTitle() : "Default share text";
-    }
-
-    @Nullable
-    String getPhoneNumber() {
-        return getDetailsData() != null ? getDetailsData().getContactNumber() : null;
+        return getDetailsData() != null &&getDetailsData().getTitle() != null
+                ? getDetailsData().getTitle()
+                : "Default share text";
     }
 
     @Override
@@ -74,7 +71,7 @@ public class DefaultAdvertDetailsPresenter extends BasePresenter<AdvertDetailsPr
         detailsData = data;
     }
 
-    AdvertDetails getDetailsData() {
+    private AdvertDetails getDetailsData() {
         return detailsData;
     }
 }

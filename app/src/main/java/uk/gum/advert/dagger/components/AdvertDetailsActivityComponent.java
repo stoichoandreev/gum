@@ -3,7 +3,7 @@ package uk.gum.advert.dagger.components;
 import dagger.Component;
 import uk.gum.advert.dagger.modules.AdvertDetailsActivityModule;
 import uk.gum.advert.dagger.scopes.DetailsActivityScope;
-import uk.gum.advert.ui.activities.AdDetailsActivity;
+import uk.gum.advert.ui.addetails.AdDetailsActivity;
 
 
 @DetailsActivityScope

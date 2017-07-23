@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import uk.gum.advert.R;
-import uk.gum.advert.ui.activities.AdDetailsActivity;
+import uk.gum.advert.ui.addetails.AdDetailsActivity;
 import uk.gum.advert.ui.test_utils.MyTestUtils;
 import uk.gum.advert.ui.views.AdvertDetailsView;
 
