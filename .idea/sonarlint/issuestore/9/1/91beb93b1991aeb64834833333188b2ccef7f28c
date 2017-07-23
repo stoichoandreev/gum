@@ -1,25 +1,0 @@
-
-…"squid:ClassVariableVisibilityCheck"TMake fuelType a static final constant or non-public and provide accessors if needed.(ƒáçûüÿÿÿÿ
-}"squid:ClassVariableVisibilityCheck"QMake title a static final constant or non-public and provide accessors if needed.(Å¬õ
-›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Àê°üÿÿÿÿ
-}"squid:ClassVariableVisibilityCheck"QMake image a static final constant or non-public and provide accessors if needed.(•—î×
-Œ"squid:ClassVariableVisibilityCheck"`Make enableContactButtons a static final constant or non-public and provide accessors if needed.(ã¼¦„
-…"squid:ClassVariableVisibilityCheck"TMake fuelType a static final constant or non-public and provide accessors if needed.(ƒáçûüÿÿÿÿ
-ˆ"squid:ClassVariableVisibilityCheck"WMake contactName a static final constant or non-public and provide accessors if needed.(šŞ‘ˆúÿÿÿÿ
-tsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(¡¶ü®8Û°öçÖ+
-|"squid:ClassVariableVisibilityCheck"PMake date a static final constant or non-public and provide accessors if needed.(áÊ÷
-„"squid:ClassVariableVisibilityCheck"SMake address a static final constant or non-public and provide accessors if needed.(€ªµúÿÿÿÿÿ
-ˆ"squid:ClassVariableVisibilityCheck"WMake contactName a static final constant or non-public and provide accessors if needed.(šŞ‘ˆúÿÿÿÿ
-ˆ"squid:ClassVariableVisibilityCheck"WMake description a static final constant or non-public and provide accessors if needed.(¹ÿ†ğÿÿÿÿÿ
-…"squid:ClassVariableVisibilityCheck"YMake contactNumber a static final constant or non-public and provide accessors if needed.(ØË÷ì
-ƒ"squid:ClassVariableVisibilityCheck"RMake images a static final constant or non-public and provide accessors if needed.(é‘şôûÿÿÿÿ
-ˆ"squid:ClassVariableVisibilityCheck"WMake description a static final constant or non-public and provide accessors if needed.(¹ÿ†ğÿÿÿÿÿ
-…"squid:ClassVariableVisibilityCheck"YMake contactNumber a static final constant or non-public and provide accessors if needed.(ØË÷ì
-„"squid:ClassVariableVisibilityCheck"SMake address a static final constant or non-public and provide accessors if needed.(€ªµúÿÿÿÿÿ
-"squid:ClassVariableVisibilityCheck"NMake id a static final constant or non-public and provide accessors if needed.(™ò¤·ÿÿÿÿÿ
-ƒ"squid:ClassVariableVisibilityCheck"RMake images a static final constant or non-public and provide accessors if needed.(é‘şôûÿÿÿÿ
-}"squid:ClassVariableVisibilityCheck"QMake title a static final constant or non-public and provide accessors if needed.(Å¬õ
-}"squid:ClassVariableVisibilityCheck"QMake price a static final constant or non-public and provide accessors if needed.(öâ¡¹
-|"squid:ClassVariableVisibilityCheck"PMake date a static final constant or non-public and provide accessors if needed.(áÊ÷
-"squid:ClassVariableVisibilityCheck"NMake id a static final constant or non-public and provide accessors if needed.(™ò¤·ÿÿÿÿÿ
-}"squid:ClassVariableVisibilityCheck"QMake price a static final constant or non-public and provide accessors if needed.(öâ¡¹

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import io.reactivex.Single;
 import uk.gum.advert.Settings;
 import uk.gum.advert.models.AdDetails;
+import uk.gum.advert.utils.RxUtil;
 
 /**
  * We just have here some mock response to simulate Network request
@@ -43,6 +44,9 @@ public class DefaultApiService implements ApiService {
                 "http://www.carandclassic.co.uk/uploads/cars/bmw/6235481.jpg",
                 "http://autopazar.co.uk/media/6383/Used_Bmw_X5_3_0d_Sport_5_Door_Auto_4x4_Black_2010_Diesel_for_Sale_in_UK.jpg",
                 "http://malayaliclassifieds.com/images/2012/02/13/51851/2009-bmw-x5-for-sale_2.jpg"));
-        return Single.just(advertRawData);
+
+        return Single
+                .just(advertRawData)
+                .compose(RxUtil.applySchedulers());
     }
 }

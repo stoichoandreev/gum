@@ -1,7 +1,7 @@
-package uk.gum.advert.ui.activities.main_activity;
+package uk.gum.advert.ui.activities.addetails;
 
 import android.content.Intent;
-import android.support.test.filters.LargeTest;
+import android.support.test.filters.MediumTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -10,9 +10,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import uk.gum.advert.R;
+import uk.gum.advert.presenters.AdvertDetailsPresenter;
 import uk.gum.advert.ui.addetails.AdDetailsActivity;
 import uk.gum.advert.ui.test_utils.MyTestUtils;
-import uk.gum.advert.ui.views.AdvertDetailsView;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -25,12 +25,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
 
-/**
- * Created by sniper on 15-Feb-2017.
- * Launch this test on Android API > 21 because it will have problems with DataBinding
- */
+
 @RunWith(AndroidJUnit4.class)
-@LargeTest
+@MediumTest
 public class AdDetailsActivityTest {
 
     @Rule
@@ -38,7 +35,7 @@ public class AdDetailsActivityTest {
 
     @Test
     public void testDoesMainActivityImplementTheRightInterface() throws Exception {
-        MyTestUtils.implementsInterface(mActivityRule.getActivity(), AdvertDetailsView.class);
+        MyTestUtils.implementsInterface(mActivityRule.getActivity(), AdvertDetailsPresenter.View.class);
     }
 
     @Test
@@ -63,6 +60,6 @@ public class AdDetailsActivityTest {
     public void testCallIntent() throws Exception {
         onView(withId(R.id.call_btn)).perform(click());
         intended(allOf(hasAction(Intent.ACTION_CHOOSER),
-                hasData("some Uri ")));
+                hasData("some Uri")));
     }
 }

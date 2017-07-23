@@ -123,14 +123,16 @@ public class DefaultAdDetailsPresenterTest {
     public void test_subscribeSMSView() throws Exception {
         //Given
         final String phoneNumber = "0929392323";
+        final String title = "Message text";
         final Observable<Object> smsViewObservable = Observable.just(new Object());
         //When
         when(mockDetailsData.getContactNumber()).thenReturn(phoneNumber);
+        when(mockDetailsData.getTitle()).thenReturn(title);
 
         presenter.setDetailsData(mockDetailsData);
         presenter.subscribeSMSView(smsViewObservable);
         //Test
-        verify(mockAdDetailsView).handleSMSIntent(phoneNumber);
+        verify(mockAdDetailsView).handleSMSIntent(phoneNumber, title);
     }
 
     @Test

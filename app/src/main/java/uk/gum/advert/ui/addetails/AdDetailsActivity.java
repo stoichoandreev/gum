@@ -72,7 +72,7 @@ public class AdDetailsActivity extends BaseActivity<AdvertDetailsPresenter, Adve
     @Override
     public void handleCallIntent(@Nullable String phoneNumber) {
         if (phoneNumber != null) {
-            Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse(AdActionType.TYPE_CALL + phoneNumber));
+            Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.fromParts(AdActionType.TYPE_CALL, phoneNumber, null));
             startActivity(Intent.createChooser(callIntent, "Make a call"));
         } else {
             onRepositoryErrorOccurred(new Throwable("Sorry we can\'t make a call"));
@@ -80,9 +80,13 @@ public class AdDetailsActivity extends BaseActivity<AdvertDetailsPresenter, Adve
     }
 
     @Override
-    public void handleSMSIntent(@Nullable String phoneNumber) {
+    public void handleSMSIntent(@Nullable String phoneNumber, @NonNull String message) {
         if (phoneNumber != null) {
-            Intent smsIntent = new Intent(Intent.ACTION_CALL, Uri.parse(AdActionType.TYPE_SMS + phoneNumber));
+            Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+            smsIntent.setType("vnd.android-dir/mms-sms");
+            smsIntent.setData(Uri.parse(AdActionType.TYPE_SMS + phoneNumber));
+            smsIntent.putExtra("sms_body", message);
+
             startActivity(Intent.createChooser(smsIntent, "Send SMS"));
         } else {
             onRepositoryErrorOccurred(new Throwable("Sorry we can\'t send SMS"));

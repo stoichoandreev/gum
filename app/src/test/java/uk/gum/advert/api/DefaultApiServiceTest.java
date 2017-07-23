@@ -8,7 +8,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import uk.gum.advert.Settings;
 import uk.gum.advert.models.AdDetails;
@@ -41,7 +40,7 @@ public class DefaultApiServiceTest {
         //When
         Single<AdDetails> data = testedApiService.getAdDetails(20);
         //Test
-        data.observeOn(AndroidSchedulers.mainThread()).subscribe(getSingleValidator());
+        data.subscribe(getSingleValidator());
     }
 
     private SingleObserver<AdDetails> getSingleValidator() {

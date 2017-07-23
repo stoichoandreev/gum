@@ -6,10 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
-/**
- * Created by sniper on 16-Feb-2017.
- */
-
 
 public class DaggerActivityTestRule<T extends Activity> extends ActivityTestRule<T> {
 

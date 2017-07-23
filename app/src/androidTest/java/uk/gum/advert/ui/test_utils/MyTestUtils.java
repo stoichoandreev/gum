@@ -1,6 +1,5 @@
 package uk.gum.advert.ui.test_utils;
 
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.test.espresso.PerformException;
 import android.support.test.espresso.UiController;
@@ -9,9 +8,7 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.espresso.util.HumanReadables;
 import android.support.test.espresso.util.TreeIterables;
 import android.view.View;
-import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import org.hamcrest.Matcher;
 
@@ -22,9 +19,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFro
 import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
-/**
- * Created by sniper on 16-Feb-2017.
- */
 
 public class MyTestUtils {
     /**

@@ -52,7 +52,7 @@ public interface AdvertDetailsPresenter extends Presenter {
          */
         void handleShareIntent(String type, String shareText);
         void handleCallIntent(String phoneNumber);
-        void handleSMSIntent(String phoneNumber);
+        void handleSMSIntent(String phoneNumber, String message);
         void handleMessageIntent(String message);
 
     }

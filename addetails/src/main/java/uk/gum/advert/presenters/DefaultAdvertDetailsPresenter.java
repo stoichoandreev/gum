@@ -25,7 +25,8 @@ public class DefaultAdvertDetailsPresenter extends BasePresenter<AdvertDetailsPr
             mView.onRepositoryErrorOccurred(new Throwable("Please provide Ad ID !"));
             return;
         }
-        addDisposable(apiService.getAdDetails(advertId).doOnSubscribe(__ -> mView.showLoading())
+        addDisposable(apiService.getAdDetails(advertId)
+                .doOnSubscribe(__ -> mView.showLoading())
                 .doFinally( () -> mView.hideLoading())
                 .subscribe( data -> {
                     setDetailsData(data);
@@ -51,7 +52,7 @@ public class DefaultAdvertDetailsPresenter extends BasePresenter<AdvertDetailsPr
     @Override
     public void subscribeSMSView(@NonNull Observable<Object> viewObservable) {
         addDisposable(
-            viewObservable.subscribe(x -> mView.handleSMSIntent(getDetailsData().getContactNumber()))
+            viewObservable.subscribe(x -> mView.handleSMSIntent(getDetailsData().getContactNumber(), getDetailsData().getTitle()))
         );
     }
 
