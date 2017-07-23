@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="uk.gum.advert">
+    package="uk.gum.advert">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,20 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="uk.gum.advert.ui.activities.MainActivity"
+            android:name="uk.gum.advert.ui.activities.AdDetailsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
-            <!--This will handle with device screen orientation and it will not restart the whole Activity. The idea is simple, just to avoid a little bit complicated implementation of saving the Observable state and resubscribe to it.
-            Note : If we need diff layouts in diff device screen configurations then we will need a little bit diff approach about this-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <!--Just for the tests-->
-        <activity
-            android:name=".ui.activities.testers.MainActivityT"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleInstance">
         </activity>
     </application>
 

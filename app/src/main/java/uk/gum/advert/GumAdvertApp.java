@@ -1,27 +1,29 @@
 package uk.gum.advert;
 
 import android.app.Application;
-import android.content.Context;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
+import javax.inject.Inject;
+
+import timber.log.Timber;
+import uk.gum.advert.dagger.ComponentsManager;
 import uk.gum.advert.dagger.components.ApplicationComponent;
 import uk.gum.advert.dagger.components.DaggerApplicationComponent;
 import uk.gum.advert.dagger.modules.ApplicationModule;
-
-/**
- * Created by sniper on 14-Feb-2017.
- */
+import uk.gum.advert.utils.ReleaseTree;
 
 public class GumAdvertApp extends Application {
-    private static GumAdvertApp instance;
-    private ApplicationComponent applicationComponent;
+
+    @Inject
+    Settings settings;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
-        if(BuildConfig.DEBUG){
+        initDagger(this);
+        if (settings.isDebug()) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectAll()
                     .penaltyDialog()
@@ -33,23 +35,29 @@ public class GumAdvertApp extends Application {
                     .penaltyDeath()
                     .build());
         }
-        applicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
+
+        initTimber();
+    }
+
+    private void initDagger(@NonNull final Application application) {
+        final ApplicationComponent applicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(application))
                 .build();
+        ComponentsManager.get().setAppComponent(applicationComponent);
+        applicationComponent.inject(this);
     }
 
-    /**
-     * Use this method to get instance of GumAdvertApp from Activity, View or something else which provide context
-     * @param context - the local context
-     * @return - will return the application context
-     */
-    public static GumAdvertApp get(Context context) {
-        return (GumAdvertApp) context.getApplicationContext();
+    private void initTimber() {
+        Timber.plant(settings.isDebug()
+                ? new Timber.DebugTree() {
+                    @Override
+                    protected String createStackElementTag(StackTraceElement element) {
+                        return super.createStackElementTag(element) + ": " + element.getLineNumber();
+                    }
+                }
+                : new ReleaseTree());
     }
 
-    public ApplicationComponent getApplicationComponent() {
-        return applicationComponent;
-    }
     /**
      * Visible only for testing purposes.
      * This method will be used only for testing purposes to provide a mock implementation
@@ -58,6 +66,6 @@ public class GumAdvertApp extends Application {
      */
     @VisibleForTesting
     public void setTestComponent(ApplicationComponent testingComponent) {
-        applicationComponent = testingComponent;
+        ComponentsManager.get().setAppComponent(testingComponent);
     }
 }

@@ -3,7 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GumAdvert.iml" filepath="$PROJECT_DIR$/GumAdvert.iml" />
+      <module fileurl="file://$PROJECT_DIR$/addetails/addetails.iml" filepath="$PROJECT_DIR$/addetails/addetails.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gum.iml" filepath="$PROJECT_DIR$/gum.iml" />
     </modules>
   </component>
 </project>

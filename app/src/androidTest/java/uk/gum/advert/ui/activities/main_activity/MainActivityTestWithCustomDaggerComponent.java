@@ -15,14 +15,14 @@ import javax.inject.Singleton;
 import dagger.Component;
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import uk.gum.advert.GumAdvertApp;
 import uk.gum.advert.R;
 import uk.gum.advert.api.ApiService;
-import uk.gum.advert.api.pojos.producer_details.AdvertDetailsResponseParseData;
+import uk.gum.advert.models.AdvertDetails;
 import uk.gum.advert.dagger.components.ApplicationComponent;
 import uk.gum.advert.dagger.modules.ApplicationModule;
-import uk.gum.advert.ui.activities.MainActivity;
+import uk.gum.advert.ui.activities.AdDetailsActivity;
 import uk.gum.advert.ui.test_utils.DaggerActivityTestRule;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -32,8 +32,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
- * Created by sniper on 15-Feb-2017.
- * This test is testing the MainActivity with some test app component (In this case some TestNetworkModel)
+ * This test is testing the MainActivity with some test app component
+ * (In this case some TestNetworkModel)
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -41,8 +41,8 @@ public class MainActivityTestWithCustomDaggerComponent {
 
     //Before we test MainActivity let's override our Application Module with a Test implementation of the same module (TestApplicationComponent)
     @Rule
-    public ActivityTestRule<MainActivity> mActivityRule =
-            new DaggerActivityTestRule<>(MainActivity.class, (application, activity) -> {
+    public ActivityTestRule<AdDetailsActivity> mActivityRule =
+            new DaggerActivityTestRule<>(AdDetailsActivity.class, (application, activity) -> {
                 GumAdvertApp app = (GumAdvertApp) application;
 
                 ApplicationComponent mTestAppComponent = DaggerMainActivityTestWithCustomDaggerComponent_TestApplicationComponent.builder()
@@ -64,7 +64,7 @@ public class MainActivityTestWithCustomDaggerComponent {
         @Singleton
         ApiService provideTestApiService() {
             return advertId -> {
-                final AdvertDetailsResponseParseData advertTestData = new AdvertDetailsResponseParseData();
+                final AdvertDetails advertTestData = new AdvertDetails();
                 //create Object with some test data
                 advertTestData.id = advertId;
                 advertTestData.title = "Test title";
@@ -76,7 +76,7 @@ public class MainActivityTestWithCustomDaggerComponent {
                 advertTestData.contactName = "Test Name";
                 advertTestData.description = "Test Description";
                 advertTestData.images = Collections.singletonList("http://test_url/image.jpg");
-                return Observable.just(advertTestData);
+                return Single.just(advertTestData);
             };
         }
     }
@@ -98,7 +98,7 @@ public class MainActivityTestWithCustomDaggerComponent {
 
         //Test also does data update will update the UI
         mActivityRule.getActivity().presenter.getDetailsData().setDate("29-Feb-2017");
-        Thread.sleep(1000);
+        Thread.sleep(100);
         onView(withId(R.id.date_tv))
                 .check(matches(withText("29-Feb-2017")))
                 .check(matches(isDisplayed()));

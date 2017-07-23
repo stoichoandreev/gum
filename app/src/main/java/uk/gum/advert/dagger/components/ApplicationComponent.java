@@ -1,22 +1,25 @@
 package uk.gum.advert.dagger.components;
 
-/**
- * Created by sniper on 14-Feb-2017.
- */
 
-import javax.inject.Singleton;
+import android.content.Context;
 
 import dagger.Component;
 import uk.gum.advert.GumAdvertApp;
-import uk.gum.advert.dagger.modules.AdvertDetailsActivityModule;
+import uk.gum.advert.Settings;
+import uk.gum.advert.api.ApiService;
 import uk.gum.advert.dagger.modules.ApplicationModule;
 import uk.gum.advert.dagger.modules.NetworkModule;
+import uk.gum.advert.dagger.scopes.ApplicationScope;
 
-@Singleton
+@ApplicationScope
 @Component(modules = {ApplicationModule.class, NetworkModule.class})
-public interface ApplicationComponent {
+public interface ApplicationComponent extends BaseComponent {
 
-    GumAdvertApp application();
-    AdvertDetailsActivityComponent plus(AdvertDetailsActivityModule module);
-    //Here we can add many plus(..... module) methods just to define diff Activities modules (by the same way)
+    Context context();
+
+    Settings settings();
+
+    ApiService apiService();
+
+    void inject(GumAdvertApp application);
 }

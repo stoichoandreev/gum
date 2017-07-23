@@ -1,22 +1,20 @@
 package uk.gum.advert.dagger.modules;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
+import uk.gum.advert.Settings;
 import uk.gum.advert.api.ApiService;
-import uk.gum.advert.api.MyApiService;
+import uk.gum.advert.api.DefaultApiService;
+import uk.gum.advert.dagger.scopes.ApplicationScope;
 
-/**
- * Created by sniper on 14-Feb-2017.
- */
 
 @Module
 public class NetworkModule {
 
     @Provides
-    @Singleton
-    ApiService provideApiService(){
-        return new MyApiService();
+    @ApplicationScope
+    ApiService provideApiService(Settings settings) {
+        return new DefaultApiService(settings);
     }
+
 }

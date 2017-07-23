@@ -1,0 +1,89 @@
+ext {
+    supportLibraryVersion = '25.0.1'
+    javaRX2Version = '2.0.1'
+    rxBindingVersion = '2.0.0'
+    picassoVersion = '2.5.2'
+    daggerVersion = '2.9'
+    timberVersion = '4.5.1'
+    jUnitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    powerMockVersion = '1.6.6'
+    easyMockVersion = '3.4'
+    jUnitRunnerVersion = '0.5'
+    espressoVersion = '2.2.2'
+    mockServerVersion = '3.5.0'
+    assertJVersion = '3.6.2'
+}
+ext {
+    libraries = [
+            supportAppcompat_v7     : "com.android.support:appcompat-v7:$supportLibraryVersion",
+            supportDesign           : "com.android.support:design:$supportLibraryVersion",
+            cardview                : "com.android.support:cardview-v7:$supportLibraryVersion",
+            supportAnnotations      : "com.android.support:support-annotations:$supportLibraryVersion",
+            rxJava2                 : "io.reactivex.rxjava2:rxjava:$javaRX2Version",
+            rxAndroid               : "io.reactivex.rxjava2:rxandroid:$javaRX2Version",
+            rxBinding2              : "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion",
+            rxBinding2Appcompat     : "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxBindingVersion",
+            picasso                 : "com.squareup.picasso:picasso:$picassoVersion",
+            timber                  : "com.jakewharton.timber:timber:$timberVersion",
+            dagger                  : "com.google.dagger:dagger:$daggerVersion",
+            daggerAnnotation        : 'javax.annotation:jsr250-api:1.0',
+            daggerCompiler          : "com.google.dagger:dagger-compiler:$daggerVersion"
+    ]
+
+    librariesTest = [
+            JUnit                   : "junit:junit:$jUnitVersion",
+            mockitoCore             : "org.mockito:mockito-core:$mockitoVersion",
+            easyMock                : "org.easymock:easymock:$easyMockVersion",
+            powerMockCore           : "org.powermock:powermock-core:$powerMockVersion",
+            powerMockEasyMock       : "org.powermock:powermock-api-easymock:$powerMockVersion",
+            powerMockMockito        : "org.powermock:powermock-api-mockito:$powerMockVersion",
+            powerMockModuleJunit4   : "org.powermock:powermock-module-junit4:$powerMockVersion",
+            assertJCore             : "org.assertj:assertj-core:$assertJVersion",
+
+            supportEspressoContrib  : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
+            supportEspressoCore     : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            supportEspressoIntents  : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
+            supportTestRules        : "com.android.support.test:rules:$jUnitRunnerVersion",
+            supportTestRunner       : "com.android.support.test:runner:$jUnitRunnerVersion",
+            mockWebServer           : "com.squareup.okhttp3:mockwebserver:$mockServerVersion"
+    ]
+}
+
+ext.commonTestDependencies = { dependencies ->
+    dependencies.testCompile librariesTest.JUnit
+    dependencies.testCompile librariesTest.mockitoCore
+    dependencies.testCompile librariesTest.easyMock
+    dependencies.testCompile librariesTest.assertJCore
+    dependencies.testCompile librariesTest.powerMockModuleJunit4
+    dependencies.testCompile (librariesTest.powerMockMockito) {
+        exclude module: 'mockito-all'
+    }
+}
+
+ext.commonAndroidTestDependencies = { dependencies ->
+    dependencies.androidTestCompile librariesTest.mockitoCore
+
+    dependencies.androidTestCompile(librariesTest.supportEspressoCore) {
+        exclude module: 'support-annotations'
+    }
+    dependencies.androidTestCompile(librariesTest.supportEspressoContrib) {
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'design'
+        exclude module: 'support-v4'
+    }
+    dependencies.androidTestCompile(librariesTest.supportEspressoIntents) {
+        exclude module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+
+    dependencies.androidTestCompile(librariesTest.supportTestRunner) {
+        exclude module: 'support-annotations'
+    }
+
+    dependencies.androidTestCompile(librariesTest.supportTestRules) {
+        exclude module: 'support-annotations'
+    }
+}

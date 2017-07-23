@@ -1,34 +1,38 @@
 package uk.gum.advert.dagger.modules;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.res.Resources;
-
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import uk.gum.advert.GumAdvertApp;
-
-/**
- * Created by sniper on 14-Feb-2017.
- */
+import uk.gum.advert.Settings;
+import uk.gum.advert.dagger.scopes.ApplicationScope;
 
 @Module
 public class ApplicationModule {
 
-    GumAdvertApp mApplication;
+    Application application;
 
-    public ApplicationModule(GumAdvertApp application){
-        this.mApplication = application;
-    }
-    @Singleton
-    @Provides
-    GumAdvertApp provideApplication(){
-        return mApplication;
+    public ApplicationModule(Application application) {
+        this.application = application;
     }
 
     @Provides
-    @Singleton
+    @ApplicationScope
+    Context provideApplication() {
+        return application;
+    }
+
+    @Provides
+    @ApplicationScope
+    Settings provideSettings() {
+        return new Settings();
+    }
+
+    @Provides
+    @ApplicationScope
     Resources provideResources() {
-        return mApplication.getResources();
+        return application.getResources();
     }
 }

@@ -1,16 +1,17 @@
 package uk.gum.advert.dagger.components;
 
-import dagger.Subcomponent;
+import dagger.Component;
 import uk.gum.advert.dagger.modules.AdvertDetailsActivityModule;
-import uk.gum.advert.dagger.scopes.ActivityScope;
-import uk.gum.advert.ui.activities.MainActivity;
+import uk.gum.advert.dagger.scopes.DetailsActivityScope;
+import uk.gum.advert.ui.activities.AdDetailsActivity;
 
-/**
- * Created by sniper on 14-Feb-2017.
- */
 
-@ActivityScope
-@Subcomponent(modules = {AdvertDetailsActivityModule.class} )
-public interface AdvertDetailsActivityComponent {
-    void inject(MainActivity activity);
+@DetailsActivityScope
+@Component(dependencies = ApplicationComponent.class, modules = {AdvertDetailsActivityModule.class} )
+public interface AdvertDetailsActivityComponent extends BaseComponent {
+
+    String KEY = AdvertDetailsActivityComponent.class.getSimpleName();
+
+    void inject(AdDetailsActivity activity);
+
 }

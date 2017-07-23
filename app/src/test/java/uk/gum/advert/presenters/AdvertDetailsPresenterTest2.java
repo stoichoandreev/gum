@@ -12,32 +12,27 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import uk.gum.advert.models.AdvertDetailsViewData;
-import uk.gum.advert.presenters.interfaces.IAdvertDetailsPresenter;
-import uk.gum.advert.repos.interfaces.IAdvertDetailsRepository;
-import uk.gum.advert.ui.views.AdvertDetailsView;
+import uk.gum.advert.view_models.AdvertDetailsViewData;
 
 import static org.easymock.EasyMock.anyString;
 import static org.easymock.EasyMock.mock;
 
-/**
- * Created by sniper on 15-Feb-2017.
- */
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Uri.class})
 public class AdvertDetailsPresenterTest2 {
 
     @Mock
-    private IAdvertDetailsRepository advertDetailsRepository;
+    private AdvertAPI advertDetailsRepository;
     @Mock
     private AdvertDetailsView advertDetailsView;
 //    @InjectMocks - NOTE we can't use InjectMocks because we are using IAdvertDetailsPresenter(interface) not AdvertDetailsPresenter
-    private IAdvertDetailsPresenter presenter;
+    private AdvertDetailsPresenter presenter;
 
     @Before
     public void setUp() throws Exception {
         //This init line can be skipped if we are using @InjectMocks but not in this case
-        presenter = new AdvertDetailsPresenter(advertDetailsView, advertDetailsRepository);
+        presenter = new DefaultAdvertDetailsPresenter(advertDetailsView, advertDetailsRepository);
     }
 
     @Test
@@ -57,12 +52,12 @@ public class AdvertDetailsPresenterTest2 {
         AdvertDetailsViewData data = new AdvertDetailsViewData.Builder()
                 .contactNumber(somePhoneNumber)
                 .build();
-        ((AdvertDetailsPresenter)presenter).setDetailsData(data);
+        ((DefaultAdvertDetailsPresenter)presenter).setDetailsData(data);
         PowerMockito.mockStatic(Uri.class);
         Uri uri = mock(Uri.class);
 
         PowerMockito.when(Uri.class, "parse", anyString()).thenReturn(uri);
-        final Intent callIntent = presenter.resolvePhoneNumberAction(Intent.ACTION_CALL, AdvertDetailsPresenter.TYPE_CALL);
-        Assert.assertEquals(callIntent.getData(), Uri.parse(AdvertDetailsPresenter.TYPE_CALL + ((AdvertDetailsPresenter)presenter).getPhoneNumber()));
+        final Intent callIntent = presenter.resolvePhoneNumberAction(Intent.ACTION_CALL, DefaultAdvertDetailsPresenter.TYPE_CALL);
+        Assert.assertEquals(callIntent.getData(), Uri.parse(DefaultAdvertDetailsPresenter.TYPE_CALL + ((DefaultAdvertDetailsPresenter)presenter).getPhoneNumber()));
     }
 }

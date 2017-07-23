@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'me.tatarka.retrolambda'
+apply from: '../config/java_module_quality.gradle'
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+retrolambda {
+    javaVersion = JavaVersion.VERSION_1_7
+}
+
+test {
+    testLogging {
+        //change this to true/false to see/hide all the logs generated during tests.
+        showStandardStreams = true
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(path: ':base')
+    compile project(path: ':api')
+
+    compile rootProject.ext.libraries.supportAnnotations
+
+    commonTestDependencies(it)
+
+}
