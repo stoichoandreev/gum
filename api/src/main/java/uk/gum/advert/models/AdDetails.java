@@ -2,7 +2,7 @@ package uk.gum.advert.models;
 
 import java.util.List;
 
-public class AdvertDetails {
+public class AdDetails {
 
     private long id;
     private String title;

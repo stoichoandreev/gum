@@ -1,10 +1,9 @@
 package uk.gum.advert.presenters;
 
 import io.reactivex.Observable;
-import uk.gum.advert.models.AdvertDetails;
+import uk.gum.advert.models.AdDetails;
 import uk.gum.advert.mvp.BasePresenterView;
 import uk.gum.advert.mvp.Presenter;
-
 
 public interface AdvertDetailsPresenter extends Presenter {
     /**
@@ -42,9 +41,9 @@ public interface AdvertDetailsPresenter extends Presenter {
 
         /**
          * Send all details data to the View. Data should be ready for presentation
-         * @param advertDetails - Data object with all ad details
+         * @param adDetails - Data object with all ad details
          */
-        void displayAdvertDetails(AdvertDetails advertDetails);
+        void displayAdvertDetails(AdDetails adDetails);
 
         /**
          * Send share text to the view, where share intent will start

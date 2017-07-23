@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import io.reactivex.Single;
 import uk.gum.advert.Settings;
-import uk.gum.advert.models.AdvertDetails;
+import uk.gum.advert.models.AdDetails;
 
 /**
  * We just have here some mock response to simulate Network request
@@ -20,10 +20,10 @@ public class DefaultApiService implements ApiService {
     }
 
     @Override
-    public Single<AdvertDetails> getAdvertDetails(long advertId) {
-        final AdvertDetails advertRawData = new AdvertDetails();
+    public Single<AdDetails> getAdDetails(long adId) {
+        final AdDetails advertRawData = new AdDetails();
 
-        advertRawData.setId(advertId);
+        advertRawData.setId(adId);
         advertRawData.setTitle("BMW X5 for sale");
         advertRawData.setPrice("25 000 £");
         advertRawData.setAddress("45 Chivalry Road, London, SW11 1HX");

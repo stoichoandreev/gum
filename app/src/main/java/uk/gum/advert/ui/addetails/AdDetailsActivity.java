@@ -21,7 +21,7 @@ import uk.gum.advert.dagger.components.ApplicationComponent;
 import uk.gum.advert.dagger.components.DaggerAdvertDetailsActivityComponent;
 import uk.gum.advert.dagger.modules.AdvertDetailsActivityModule;
 import uk.gum.advert.databinding.ActivityAdDetailsBinding;
-import uk.gum.advert.models.AdvertDetails;
+import uk.gum.advert.models.AdDetails;
 import uk.gum.advert.presenters.AdvertDetailsPresenter;
 import uk.gum.advert.ui.BaseActivity;
 
@@ -54,10 +54,10 @@ public class AdDetailsActivity extends BaseActivity<AdvertDetailsPresenter, Adve
     }
 
     @Override
-    public void displayAdvertDetails(@NonNull AdvertDetails advertDetails) {
-        activityBinding.setAdDetails(advertDetails);
+    public void displayAdvertDetails(@NonNull AdDetails adDetails) {
+        activityBinding.setAdDetails(adDetails);
         Picasso.with(activityBinding.currentImage.getContext())
-                .load(advertDetails.getImages().get(0))
+                .load(adDetails.getImages().get(0))
                 .into(activityBinding.currentImage);
     }
 

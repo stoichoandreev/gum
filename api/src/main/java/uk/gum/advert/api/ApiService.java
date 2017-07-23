@@ -1,7 +1,7 @@
 package uk.gum.advert.api;
 
 import io.reactivex.Single;
-import uk.gum.advert.models.AdvertDetails;
+import uk.gum.advert.models.AdDetails;
 
 
 public interface ApiService {
@@ -10,5 +10,5 @@ public interface ApiService {
      * @param advertId - advert id
      * @return - Observable/Single to emit AdvertDetails data
      */
-    Single<AdvertDetails> getAdvertDetails(long advertId);
+    Single<AdDetails> getAdDetails(long advertId);
 }

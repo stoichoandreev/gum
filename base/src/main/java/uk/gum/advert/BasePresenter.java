@@ -7,10 +7,10 @@ import uk.gum.advert.mvp.BasePresenterView;
 public abstract class BasePresenter<V extends BasePresenterView> {
 
     protected V mView;
-    private CompositeDisposable mCompositeDisposables;
+    private CompositeDisposable compositeDisposable;
 
     protected BasePresenter() {
-        mCompositeDisposables = new CompositeDisposable();
+        compositeDisposable = new CompositeDisposable();
     }
 
     public BasePresenter(V view) {
@@ -19,18 +19,22 @@ public abstract class BasePresenter<V extends BasePresenterView> {
     }
 
     /**
-     * Add disposable(subscription in RX Java 1) to the CompositeDisposable set
-     * @param newDisposable - the disposable (old name was subscription) to be added
+     * Add disposable(subscription) to the CompositeDisposable set
+     * @param newDisposable - the disposable to be added
      */
-    public void addDisposable(Disposable newDisposable){
-        if(newDisposable != null){
-            mCompositeDisposables.add(newDisposable);
+    public void addDisposable(Disposable newDisposable) {
+        if (newDisposable != null) {
+            getCompositeDisposable().add(newDisposable);
         }
     }
 
-    public void clearAllDisposables(){
-        if(mCompositeDisposables != null) {
-            mCompositeDisposables.dispose();
+    public void clearAllDisposables() {
+        if (getCompositeDisposable() != null) {
+            getCompositeDisposable().dispose();
         }
+    }
+
+    protected CompositeDisposable getCompositeDisposable() {
+        return compositeDisposable;
     }
 }

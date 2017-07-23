@@ -1,18 +1,17 @@
 package uk.gum.advert.presenters;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import io.reactivex.Observable;
 import uk.gum.advert.BasePresenter;
 import uk.gum.advert.api.ApiService;
-import uk.gum.advert.models.AdvertDetails;
+import uk.gum.advert.models.AdDetails;
 
 
 public class DefaultAdvertDetailsPresenter extends BasePresenter<AdvertDetailsPresenter.View> implements AdvertDetailsPresenter {
 
     private ApiService apiService;
-    private AdvertDetails detailsData;
+    private AdDetails detailsData;
 
     public DefaultAdvertDetailsPresenter(@NonNull AdvertDetailsPresenter.View view,
                                          @NonNull ApiService apiService) {
@@ -26,7 +25,7 @@ public class DefaultAdvertDetailsPresenter extends BasePresenter<AdvertDetailsPr
             mView.onRepositoryErrorOccurred(new Throwable("Please provide Ad ID !"));
             return;
         }
-        addDisposable(apiService.getAdvertDetails(advertId).doOnSubscribe( __ -> mView.showLoading())
+        addDisposable(apiService.getAdDetails(advertId).doOnSubscribe(__ -> mView.showLoading())
                 .doFinally( () -> mView.hideLoading())
                 .subscribe( data -> {
                     setDetailsData(data);
@@ -37,22 +36,30 @@ public class DefaultAdvertDetailsPresenter extends BasePresenter<AdvertDetailsPr
 
     @Override
     public void subscribeShareView(@NonNull Observable<Object> viewObservable) {
-        viewObservable.subscribe(x -> mView.handleShareIntent("text/plain", getShareText()));
+        addDisposable(
+                viewObservable.subscribe(x -> mView.handleShareIntent("text/plain", getShareText()))
+        );
     }
 
     @Override
     public void subscribeCallView(@NonNull Observable<Object> viewObservable) {
-        viewObservable.subscribe(x -> mView.handleCallIntent(getDetailsData().getContactNumber()));
+        addDisposable(
+                viewObservable.subscribe(x -> mView.handleCallIntent(getDetailsData().getContactNumber()))
+        );
     }
 
     @Override
     public void subscribeSMSView(@NonNull Observable<Object> viewObservable) {
-        viewObservable.subscribe(x -> mView.handleSMSIntent(getDetailsData().getContactNumber()));
+        addDisposable(
+            viewObservable.subscribe(x -> mView.handleSMSIntent(getDetailsData().getContactNumber()))
+        );
     }
 
     @Override
     public void subscribeMessageView(@NonNull Observable<Object> viewObservable) {
-        viewObservable.subscribe(x -> mView.handleMessageIntent("Some message to be shared across the platform"));
+        addDisposable(
+                viewObservable.subscribe(x -> mView.handleMessageIntent("Some message to be shared across the platform"))
+        );
     }
 
     @NonNull
@@ -64,14 +71,14 @@ public class DefaultAdvertDetailsPresenter extends BasePresenter<AdvertDetailsPr
 
     @Override
     public void destroy() {
-        super.clearAllDisposables();
+        clearAllDisposables();
     }
 
-    void setDetailsData(AdvertDetails data) {
+    void setDetailsData(AdDetails data) {
         detailsData = data;
     }
 
-    private AdvertDetails getDetailsData() {
+    private AdDetails getDetailsData() {
         return detailsData;
     }
 }

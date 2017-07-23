@@ -19,7 +19,7 @@ import io.reactivex.Single;
 import uk.gum.advert.GumAdvertApp;
 import uk.gum.advert.R;
 import uk.gum.advert.api.ApiService;
-import uk.gum.advert.models.AdvertDetails;
+import uk.gum.advert.models.AdDetails;
 import uk.gum.advert.dagger.components.ApplicationComponent;
 import uk.gum.advert.dagger.modules.ApplicationModule;
 import uk.gum.advert.ui.addetails.AdDetailsActivity;
@@ -64,7 +64,7 @@ public class MainActivityTestWithCustomDaggerComponent {
         @Singleton
         ApiService provideTestApiService() {
             return advertId -> {
-                final AdvertDetails advertTestData = new AdvertDetails();
+                final AdDetails advertTestData = new AdDetails();
                 //create Object with some test data
                 advertTestData.id = advertId;
                 advertTestData.title = "Test title";
