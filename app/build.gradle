@@ -20,7 +20,10 @@ android {
         def versionMajor = versionProps['VERSION_MAJOR'].toInteger()
         def versionMinor = versionProps['VERSION_MINOR'].toInteger()
         def versionPatch = versionProps['VERSION_PATCH'].toInteger()
+
         defaultConfig {
+            buildConfigField 'String', 'APPLICATION_PACKAGE_NAME', '\"uk.gum.advert\"'
+            buildConfigField 'String', 'BUILD_PACKAGE_SUFFIX', '\".debug\"'
             applicationId "uk.gum.advert"
             minSdkVersion 16
             targetSdkVersion 25

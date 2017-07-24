@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import uk.gum.advert.R;
-import uk.gum.advert.presenters.AdvertDetailsPresenter;
+import uk.gum.advert.presenters.AdDetailsPresenter;
 import uk.gum.advert.ui.addetails.AdDetailsActivity;
 import uk.gum.advert.ui.test_utils.MyTestUtils;
 
@@ -35,7 +35,7 @@ public class AdDetailsActivityTest {
 
     @Test
     public void testDoesMainActivityImplementTheRightInterface() throws Exception {
-        MyTestUtils.implementsInterface(mActivityRule.getActivity(), AdvertDetailsPresenter.View.class);
+        MyTestUtils.implementsInterface(mActivityRule.getActivity(), AdDetailsPresenter.View.class);
     }
 
     @Test

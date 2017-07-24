@@ -8,13 +8,13 @@ import uk.gum.advert.api.ApiService;
 import uk.gum.advert.models.AdDetails;
 
 
-public class DefaultAdvertDetailsPresenter extends BasePresenter<AdvertDetailsPresenter.View> implements AdvertDetailsPresenter {
+public class DefaultAdDetailsPresenter extends BasePresenter<AdDetailsPresenter.View> implements AdDetailsPresenter {
 
     private ApiService apiService;
     private AdDetails detailsData;
 
-    public DefaultAdvertDetailsPresenter(@NonNull AdvertDetailsPresenter.View view,
-                                         @NonNull ApiService apiService) {
+    public DefaultAdDetailsPresenter(@NonNull AdDetailsPresenter.View view,
+                                     @NonNull ApiService apiService) {
         super(view);
         this.apiService = apiService;
     }

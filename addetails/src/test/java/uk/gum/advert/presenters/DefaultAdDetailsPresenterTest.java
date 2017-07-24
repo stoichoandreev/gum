@@ -27,18 +27,18 @@ public class DefaultAdDetailsPresenterTest {
     @Mock
     private ApiService mockApiService;
     @Mock
-    private AdvertDetailsPresenter.View mockAdDetailsView;
+    private AdDetailsPresenter.View mockAdDetailsView;
     @Mock
     private AdDetails mockDetailsData;
 
-    private DefaultAdvertDetailsPresenter presenter;
+    private DefaultAdDetailsPresenter presenter;
 
     private final int advertId = 10;
 
     @Before
     public void setUp() throws Exception {
         //This init line can be skipped if we are using @InjectMocks but not in this case
-        presenter = new DefaultAdvertDetailsPresenter(mockAdDetailsView, mockApiService);
+        presenter = new DefaultAdDetailsPresenter(mockAdDetailsView, mockApiService);
     }
 
     @Test
@@ -171,7 +171,7 @@ public class DefaultAdDetailsPresenterTest {
         //we need to use Spy object
 
         //Given
-        DefaultAdvertDetailsPresenter presenterSpy = Mockito.spy(presenter);
+        DefaultAdDetailsPresenter presenterSpy = Mockito.spy(presenter);
         //When
         presenterSpy.destroy();
         //Test

@@ -35,7 +35,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class MainActivityTestWithCustomDaggerComponent {
+public class AdActivityTestWithCustomComponent {
 
     //Before we test MainActivity let's override our Application Module with a Test implementation of the Application module (TestApplicationComponent)
     @Rule
@@ -43,7 +43,7 @@ public class MainActivityTestWithCustomDaggerComponent {
             new DaggerActivityTestRule<>(AdDetailsActivity.class, (application, activity) -> {
                 GumAdvertApp app = (GumAdvertApp) application;
 
-                ApplicationComponent mTestAppComponent = DaggerMainActivityTestWithCustomDaggerComponent_TestApplicationComponent.builder()
+                ApplicationComponent mTestAppComponent = DaggerAdActivityTestWithCustomComponent_TestApplicationComponent.builder()
                         .applicationModule(new ApplicationModule(app))
                         .build();
 

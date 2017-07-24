@@ -5,7 +5,7 @@ import uk.gum.advert.models.AdDetails;
 import uk.gum.advert.mvp.BasePresenterView;
 import uk.gum.advert.mvp.Presenter;
 
-public interface AdvertDetailsPresenter extends Presenter {
+public interface AdDetailsPresenter extends Presenter {
     /**
      * View should use this method to request advert details data for it self
      * @param advertId - the id of the requested advert

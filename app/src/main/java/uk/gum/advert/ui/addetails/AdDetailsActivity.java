@@ -16,20 +16,20 @@ import javax.inject.Inject;
 import uk.gum.advert.R;
 import uk.gum.advert.constants.AdActionType;
 import uk.gum.advert.dagger.ComponentsManager;
-import uk.gum.advert.dagger.components.AdvertDetailsActivityComponent;
+import uk.gum.advert.dagger.components.AdDetailsActivityComponent;
 import uk.gum.advert.dagger.components.ApplicationComponent;
-import uk.gum.advert.dagger.components.DaggerAdvertDetailsActivityComponent;
-import uk.gum.advert.dagger.modules.AdvertDetailsActivityModule;
+import uk.gum.advert.dagger.components.DaggerAdDetailsActivityComponent;
+import uk.gum.advert.dagger.modules.AdDetailsActivityModule;
 import uk.gum.advert.databinding.ActivityAdDetailsBinding;
 import uk.gum.advert.models.AdDetails;
-import uk.gum.advert.presenters.AdvertDetailsPresenter;
+import uk.gum.advert.presenters.AdDetailsPresenter;
 import uk.gum.advert.ui.BaseActivity;
 
 
-public class AdDetailsActivity extends BaseActivity<AdvertDetailsPresenter, AdvertDetailsActivityComponent> implements AdvertDetailsPresenter.View {
+public class AdDetailsActivity extends BaseActivity<AdDetailsPresenter, AdDetailsActivityComponent> implements AdDetailsPresenter.View {
 
     @Inject
-    public AdvertDetailsPresenter presenter;
+    public AdDetailsPresenter presenter;
 
     protected ActivityAdDetailsBinding activityBinding;
 
@@ -114,16 +114,16 @@ public class AdDetailsActivity extends BaseActivity<AdvertDetailsPresenter, Adve
     }
 
     @Override
-    protected AdvertDetailsActivityComponent getScreenComponent() {
-        AdvertDetailsActivityComponent component = ComponentsManager.get().getBaseComponent(AdvertDetailsActivityComponent.KEY);
+    protected AdDetailsActivityComponent getScreenComponent() {
+        AdDetailsActivityComponent component = ComponentsManager.get().getBaseComponent(AdDetailsActivityComponent.KEY);
         //If component already exist (in case of screen config change),
         //we would like to use the same presenter instance (we don't want to init everything from scratch, only the view)
         if (component == null) {
             ApplicationComponent appComponent = ComponentsManager.get().getAppComponent();
-            component = DaggerAdvertDetailsActivityComponent
+            component = DaggerAdDetailsActivityComponent
                     .builder()
                     .applicationComponent(appComponent)
-                    .advertDetailsActivityModule(new AdvertDetailsActivityModule(this)).build();
+                    .adDetailsActivityModule(new AdDetailsActivityModule(this)).build();
             ComponentsManager.get().putBaseComponent(getComponentKey(), component);
         }
         return component;
@@ -131,6 +131,6 @@ public class AdDetailsActivity extends BaseActivity<AdvertDetailsPresenter, Adve
 
     @Override
     protected String getComponentKey() {
-        return AdvertDetailsActivityComponent.KEY;
+        return AdDetailsActivityComponent.KEY;
     }
 }
