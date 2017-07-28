@@ -3,9 +3,10 @@ package uk.gum.advert.api;
 import java.util.Arrays;
 
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import uk.gum.advert.Settings;
 import uk.gum.advert.models.AdDetails;
-import uk.gum.advert.utils.RxUtil;
 
 /**
  * We just have here some mock response to simulate Network request
@@ -47,6 +48,7 @@ public class DefaultApiService implements ApiService {
 
         return Single
                 .just(advertRawData)
-                .compose(RxUtil.applySchedulers());
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

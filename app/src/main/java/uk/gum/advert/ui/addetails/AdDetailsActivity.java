@@ -75,7 +75,7 @@ public class AdDetailsActivity extends BaseActivity<AdDetailsPresenter, AdDetail
             Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.fromParts(AdActionType.TYPE_CALL, phoneNumber, null));
             startActivity(Intent.createChooser(callIntent, "Make a call"));
         } else {
-            onRepositoryErrorOccurred(new Throwable("Sorry we can\'t make a call"));
+            showError(new Throwable("Sorry we can\'t make a call"));
         }
     }
 
@@ -89,7 +89,7 @@ public class AdDetailsActivity extends BaseActivity<AdDetailsPresenter, AdDetail
 
             startActivity(Intent.createChooser(smsIntent, "Send SMS"));
         } else {
-            onRepositoryErrorOccurred(new Throwable("Sorry we can\'t send SMS"));
+            showError(new Throwable("Sorry we can\'t send SMS"));
         }
     }
 
@@ -99,7 +99,7 @@ public class AdDetailsActivity extends BaseActivity<AdDetailsPresenter, AdDetail
     }
 
     @Override
-    public void onRepositoryErrorOccurred(@NonNull Throwable error) {
+    public void showError(@NonNull Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_LONG).show();
     }
 

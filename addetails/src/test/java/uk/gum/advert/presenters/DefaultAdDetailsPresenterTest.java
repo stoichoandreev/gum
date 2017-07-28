@@ -45,7 +45,7 @@ public class DefaultAdDetailsPresenterTest {
     public void test_getAdvertDetailsWithoutAd() throws Exception {
         presenter.getAdvertDetails(0);
         //Test
-        verify(mockAdDetailsView).onRepositoryErrorOccurred(any());
+        verify(mockAdDetailsView).showError(any());
         verify(mockApiService, never()).getAdDetails(0);
     }
 
@@ -70,7 +70,7 @@ public class DefaultAdDetailsPresenterTest {
 
         presenter.getAdvertDetails(advertId);
         //Test
-        verify(mockAdDetailsView).onRepositoryErrorOccurred(error);
+        verify(mockAdDetailsView).showError(error);
     }
 
     @Test

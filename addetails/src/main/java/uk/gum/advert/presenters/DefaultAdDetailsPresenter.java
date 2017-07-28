@@ -22,7 +22,7 @@ public class DefaultAdDetailsPresenter extends BasePresenter<AdDetailsPresenter.
     @Override
     public void getAdvertDetails(long advertId){
         if(advertId <= 0){
-            mView.onRepositoryErrorOccurred(new Throwable("Please provide Ad ID !"));
+            mView.showError(new Throwable("Please provide Ad ID !"));
             return;
         }
         addDisposable(apiService.getAdDetails(advertId)
@@ -31,7 +31,7 @@ public class DefaultAdDetailsPresenter extends BasePresenter<AdDetailsPresenter.
                 .subscribe( data -> {
                     setDetailsData(data);
                     mView.displayAdvertDetails(getDetailsData());
-                }, error -> mView.onRepositoryErrorOccurred(error))
+                }, error -> mView.showError(error))
         );
     }
 
